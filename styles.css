@@ -1,0 +1,18 @@
+
+body {
+    min-height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+ 
+}
+
+
+canvas {
+    /* border: 10px solid gray; */
+    border-radius: 10px;    
+    background: rgb(223, 239, 245);
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='48' height='48' viewport='0 0 100 100' style='fill:black;font-size:40px;'><text y='50%'>✍️</text></svg>")
+    -15 25,  auto;
+}
+
