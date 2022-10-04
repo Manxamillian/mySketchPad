@@ -14,5 +14,23 @@ canvas {
     background: rgb(223, 239, 245);
     cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='48' height='48' viewport='0 0 100 100' style='fill:black;font-size:40px;'><text y='50%'>✍️</text></svg>")
     -15 25,  auto;
+    width: 400;
+    height: 400;
 }
+
+.btn {
+    background-color: lightcyan;
+    border-width: 5px;
+    border: 2px, solid, black;
+    width: 100px;
+    height: 50px;
+
+}
+
+#canvas {
+    background-color: lightyellow;
+    border-color: red;
+}
+
+
 

@@ -4,40 +4,91 @@ const mainContainer = document.body;
 
 const canvas = document.createElement('canvas');                //actual drawing area within the sketchBoard area - has a border
 const inputArea = document.createElement('div');                //div area below the sketchBoard and canvas for input box and confirm btn
-const userInputBox = document.createElement("input");           //input box for changing canvas size and clearing previous drawing
-const confirmBtn = document.createElement("button");            //confirm button to change canvas size
+const clearCanvasBtn = document.createElement("button");            //confirm button to change canvas size
+const smallCanvasBtn = document.createElement("button");
+const mediumCanvasBtn = document.createElement("button");
+const largeCanvasBtn = document.createElement("button");
+
 
 mainContainer.append(canvas);                                   // APPEND
 mainContainer.append(inputArea);
-inputArea.append(userInputBox);                                 
-inputArea.append(confirmBtn);
+inputArea.append(smallCanvasBtn);
+inputArea.append(mediumCanvasBtn);
+inputArea.append(largeCanvasBtn);
+inputArea.append(clearCanvasBtn);
 
-userInputBox.classList.add('inputBox');                         // ADD CLASSES & IDs
-confirmBtn.classList.add('confirmSizeBtn');
-inputArea.classList.add('inputArea');
-canvas.setAttribute('id', 'canvas');
+                     
+inputArea.classList.add('inputArea');                           // ADD CLASSES & IDs
+smallCanvasBtn.classList.add('btn');
+smallCanvasBtn.setAttribute('id', 'small');
+mediumCanvasBtn.classList.add('btn');
+mediumCanvasBtn.setAttribute('id', 'medium');
+largeCanvasBtn.classList.add('btn');
+largeCanvasBtn.setAttribute('id', 'large');
+clearCanvasBtn.classList.add('btn');
+clearCanvasBtn.setAttribute('id', 'canvas');
 
-userInputBox.setAttribute("type", "text");                      //set input box style
-userInputBox.style.border = "3px solid rgb(0,0,0)";
-userInputBox.style.backgroundColor = "rgb(255, 255, 239)";
+document.getElementById('small').textContent="SMALL";           // LABEL BUTTONS
+document.getElementById('medium').textContent="MEDIUM";
+document.getElementById('large').textContent="LARGE";
+document.getElementById('canvas').textContent="CLEAR";
 
-confirmBtn.style.border = "3px solid rgb(0,0,0)";               //set confirm button style
-confirmBtn.textContent = "Confirm";
+const buttons = document.querySelectorAll("button");            // CHANGE CANVAS SIZE TO SMALL, MEDIUM, OR LARGE
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        if (button.id == "small") {
+            canvasSize(400, 400);
+        }
+        if (button.id == "medium") {
+            canvasSize(600, 600);
+        }
+        if (button.id == "large") {
+            canvasSize(800, 800);
+        }
+        if (button.id == "canvas") {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    });
+});
 
-canvas.width = 800;                                             // set the resolution for the canvas
-canvas.height = 500;
 
-canvas.style.width = 800;                                       // set canvas display size
-canvas.style.height = 500;
+function canvasSize(newWidth, newHeight) {                      // CHANGE CANVAS SIZE
+    canvas.width = newWidth;                                     // reset the resolution for the canvas
+    canvas.height = newHeight;
+
+    canvas.style.width = newWidth;                               // reset canvas display size
+    canvas.style.height = newHeight;
+}
+
+                                                                // INITIAL CANVAS RESOLUTION AND DISPLAY SIZE
+canvas.width = 400;                                             // initial canvas resolution
+canvas.height = 400;
+
+canvas.style.width = 400;                                       // set initial canvas display size
+canvas.style.height = 400;
+
+
+
+//NOTES - still to do:
+//1. cursor doesn't match up with draw-line with small and large canvas size
+//2. could add a color swatch to choose which color user wants to use
+
+
+
+
 
 let canvasBoundaries = canvas.getBoundingClientRect();
+
+/////////////log/////////////////
 console.log(canvasBoundaries);
 
 const ctx = canvas.getContext('2d');                            //setting up canvas 'pen down' drawing              
 let coordinates = { x: 0, y: 0 };
 
-const width = canvas.width;                               // TESTING
+const width = canvas.width;                                 // TESTING
 const height = canvas.height;
+
+/////////////log/////////////////
 console.log(width, height);
 
 
@@ -47,6 +98,8 @@ document.addEventListener('mouseup', stop);                     //event listener
 function reposition(event){
     coordinates.x = event.clientX - canvas.offsetLeft;
     coordinates.y = event.clientY - canvas.offsetTop;
+
+    /////////////log/////////////////
     console.log(coordinates);                             // TESTING
 }
 
